@@ -1,16 +1,10 @@
 package info.walltime.bitcoinwot;
 
-import com.lambdaworks.crypto.SCrypt;
-import com.lambdaworks.crypto.SCryptUtil;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.io.IOException;
+import org.bitcoinj.core.ECKey;
+
+import java.awt.*;
 import java.net.URL;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.bitcoinj.core.ECKey;
-import org.jibble.pircbot.IrcException;
 
 public class BitcoinWot {
 
@@ -31,7 +25,7 @@ public class BitcoinWot {
         });
 
         BOT.setAutoNickChange(true);
-        BOT.setVerbose(true);
+        BOT.setVerbose(false);
         BOT.connect("chat.freenode.net");
     }
 

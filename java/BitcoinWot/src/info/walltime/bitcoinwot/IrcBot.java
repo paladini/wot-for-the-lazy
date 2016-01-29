@@ -1,25 +1,21 @@
 package info.walltime.bitcoinwot;
 
-import java.awt.Cursor;
-import java.awt.Frame;
-import java.awt.event.WindowEvent;
-import javax.swing.JOptionPane;
 import org.jibble.pircbot.PircBot;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class IrcBot extends PircBot {
     @Override
     public void onMessage(String channel, String sender,
                        String login, String hostname, String message) {
         super.onMessage(channel, sender, login, hostname, message);
-
-        System.out.println(sender + ": " + message);
     }
 
     @Override
     protected void onPrivateMessage(String sender, String login, String hostname, String message) {
         super.onPrivateMessage(sender, login, hostname, message);
-        
-        System.out.println("Private message: " + sender + ": " + message);
 
         if (sender.equals("gribble")) {
             if (message.contains("Your challenge string")) {
@@ -73,8 +69,6 @@ public class IrcBot extends PircBot {
         super.onNotice(sourceNick, sourceLogin, sourceHostname, target, notice);
 
         if (BitcoinWot.LOGIN != null) {
-            System.out.println("Notice: " + sourceNick + ": " + notice);
-
             if (notice.contains("is not registered")) {
                 
                 if (!BitcoinWot.REGISTERING.get()) {

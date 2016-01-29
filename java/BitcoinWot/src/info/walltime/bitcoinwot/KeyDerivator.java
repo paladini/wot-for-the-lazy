@@ -1,9 +1,10 @@
 package info.walltime.bitcoinwot;
 
 import com.lambdaworks.crypto.SCrypt;
+import org.bitcoinj.core.ECKey;
+
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
-import org.bitcoinj.core.ECKey;
 
 public class KeyDerivator {
 
@@ -18,8 +19,8 @@ public class KeyDerivator {
     public ECKey generateKey() throws GeneralSecurityException, UnsupportedEncodingException {
         final String composedKey = username + ":" + password + ":tatualado";
         byte[] hash = SCrypt.scrypt(composedKey.getBytes("UTF-8"),
-        new String("Uzy7pjlwDkwIWuq").getBytes("UTF-8"), 
-        1048576, 8, 4, 32);
+        new String("Uzy7pjlwDkwIWuq").getBytes("UTF-8"),
+                32768, 4, 1, 32);
 
         ECKey generatedKey = ECKey.fromPrivate(hash, false);
         return generatedKey;
