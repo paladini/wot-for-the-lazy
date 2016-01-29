@@ -7,6 +7,7 @@ package info.walltime.bitcoinwot;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,7 +83,7 @@ public class AuthenticatedUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Qualifique algum usuário na rede");
+        jLabel4.setText("Qualifique algum usuário na rede:");
 
         jLabel5.setText("Qual é o seu grau de confiança em relação a ele (de -10 a +10)?");
 
@@ -242,18 +243,28 @@ public class AuthenticatedUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int[] levels = {0, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-
-        int level = levels[jComboBox1.getSelectedIndex()];
-
-        if (jComboBox1.getSelectedIndex() == 0) {
-            BitcoinWot.BOT.sendMessage("gribble", ";;unrate " 
-                            + jTextField2.getText());            
+        if (jTextField2.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, 
+                            "Você precisa digitar o nome do usuário que deseja qualificar no campo correto.");            
+        } else if (jComboBox1.getSelectedIndex() > 0 && jTextArea1.getText().length() < 10) {
+            JOptionPane.showMessageDialog(null, 
+                            "Também não seja tão preguiçoso assim, vai! :)\n\nCrie um depoimento legal."
+                                    + " De preferência em inglês, mas pode ser em português se quiser."
+                                    + "\nQuem é essa pessoa? Onde a conheceu? Por que confia ou deixa de confiar nela?");
         } else {
+            int[] levels = {0, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-            BitcoinWot.BOT.sendMessage("gribble", ";;rate " 
-                            + jTextField2.getText() + " "
-                            + level + " " + jTextArea1.getText().replaceAll("\n", " - "));
+            int level = levels[jComboBox1.getSelectedIndex()];
+
+            if (jComboBox1.getSelectedIndex() == 0) {
+                BitcoinWot.BOT.sendMessage("gribble", ";;unrate " 
+                                + jTextField2.getText());            
+            } else {
+
+                BitcoinWot.BOT.sendMessage("gribble", ";;rate " 
+                                + jTextField2.getText() + " "
+                                + level + " " + jTextArea1.getText().replaceAll("\n", " - "));
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

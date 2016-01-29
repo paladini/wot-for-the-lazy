@@ -160,7 +160,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Qualifique algum usu&#xe1;rio na rede"/>
+        <Property name="text" type="java.lang.String" value="Qualifique algum usu&#xe1;rio na rede:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
