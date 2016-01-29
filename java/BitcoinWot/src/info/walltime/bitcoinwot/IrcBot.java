@@ -11,11 +11,19 @@ public class IrcBot extends PircBot {
     public void onMessage(String channel, String sender,
                        String login, String hostname, String message) {
         super.onMessage(channel, sender, login, hostname, message);
+
+        if (BitcoinWot.DEBUG) {
+            System.out.println(sender + ": " + message);
+        }
     }
 
     @Override
     protected void onPrivateMessage(String sender, String login, String hostname, String message) {
         super.onPrivateMessage(sender, login, hostname, message);
+
+        if (BitcoinWot.DEBUG) {
+            System.out.println("Private message: " + sender + ": " + message);
+        }
 
         if (sender.equals("gribble")) {
             if (message.contains("Your challenge string")) {
@@ -69,6 +77,10 @@ public class IrcBot extends PircBot {
         super.onNotice(sourceNick, sourceLogin, sourceHostname, target, notice);
 
         if (BitcoinWot.LOGIN != null) {
+            if (BitcoinWot.DEBUG) {
+                System.out.println("Notice: " + sourceNick + ": " + notice);
+            }
+
             if (notice.contains("is not registered")) {
                 
                 if (!BitcoinWot.REGISTERING.get()) {
@@ -138,7 +150,9 @@ public class IrcBot extends PircBot {
     protected void onChannelInfo(String channel, int userCount, String topic) {
         super.onChannelInfo(channel, userCount, topic);
 
-        System.out.println("Channel " + channel);
+        if (BitcoinWot.DEBUG) {
+            System.out.println("Channel " + channel);
+        }
 
     }
 

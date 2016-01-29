@@ -8,10 +8,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BitcoinWot {
 
+    public static boolean DEBUG = false;
+
     public static final IrcBot BOT = new IrcBot();
     public static final AtomicBoolean REGISTERING = new AtomicBoolean();
     public static final AtomicBoolean VERIFYING_EMAIL = new AtomicBoolean();
-    
+
     public static Login LOGIN;
     public static Password PASSWORD;
     public static ECKey KEY;
@@ -20,12 +22,16 @@ public class BitcoinWot {
     public static VerifyEmail VERIFY_EMAIL;
 
     public static void main(String[] args) throws Exception {
+        if (args.length > 0 && args[1].equals("-debug")) {
+            BitcoinWot.DEBUG = true;
+        }
+
         java.awt.EventQueue.invokeLater(() -> {
             new Login().setVisible(true);
         });
 
         BOT.setAutoNickChange(true);
-        BOT.setVerbose(false);
+        BOT.setVerbose(BitcoinWot.DEBUG);
         BOT.connect("chat.freenode.net");
     }
 
